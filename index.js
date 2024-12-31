@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const dotenv = require('dotenv');
-const cors = require('cors');  // Add this lineconst 
+const cors = require('cors'); // Add this lineconst
 const companySetupRoutes = require('./routes/companySetupRoutes');
 const supplierRoutes = require('./routes/supplierRoutes');
 const generalSetupRoutes = require('./routes/generalSetupRoutes');
@@ -45,17 +45,13 @@ const patientReceiptPaymentRouter = require('./routes/patientReceiptPaymentRoute
 const dayStartCloseRoutes = require('./routes/dayStartCloseRoutes');
 const tenderSettlementRoutes = require('./routes/tenderSettlementRoutes');
 
-
-
-
-
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());  // Add this line
+app.use(cors()); // Add this line
 
 app.use(express.json()); // Body parser middleware
 
@@ -66,7 +62,6 @@ app.use(bodyParser.urlencoded({ limit: '500mb', extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 app.use(express.static(path.join(__dirname, 'htmlpage')));
-
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'htmlpage', 'index.html'));
@@ -118,7 +113,6 @@ app.use('/api/posinvoices', posInvoiceRoutes);
 app.use('/api/patientreceiptpayments', patientReceiptPaymentRouter);
 app.use('/api/daystartclose', dayStartCloseRoutes);
 app.use('/api/tendersettlement', tenderSettlementRoutes);
-
 
 app.listen(PORT, () => {
   console.log(`Server started on http://localhost:${PORT}`);
