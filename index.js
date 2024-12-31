@@ -114,6 +114,10 @@ app.use('/api/patientreceiptpayments', patientReceiptPaymentRouter);
 app.use('/api/daystartclose', dayStartCloseRoutes);
 app.use('/api/tendersettlement', tenderSettlementRoutes);
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'htmlpage', 'index.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Server started on http://localhost:${PORT}`);
 });
